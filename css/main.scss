@@ -1,0 +1,181 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(25,23,28);
+  font-family: sans-serif;
+}
+
+$textColor: rgb(255, 255, 255);
+
+@mixin mobile {
+  @media only screen and (max-width: 760px) {
+    @content;
+  }
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 70%;
+  display: grid;
+  grid-template-areas: 
+  ". head head head head . . . . . . btns";
+  background-color: rgb(209, 205, 205);
+  box-shadow: 0 3px 2px darkgray;
+  padding: 1rem;
+  justify-content: baseline;
+  align-items: center;
+  z-index: 2;
+  color: rgb(24, 24, 24);
+
+  @include mobile {
+    grid-template-areas: 
+    ". . . . head head head head . . . ."
+    ". . . . btns btns btns btns . . . .";
+    width: 100%;
+  }
+
+  h1 {
+    grid-area: head;
+    font-size: 36px;
+
+    @include mobile {
+      font-size: 26px;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .buttons {
+    grid-area: btns;
+
+    @include mobile {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    button {
+      border: none;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 50%;
+      margin-left: 20px;
+      box-shadow: 0 3px 2px darkgray;
+      transition: all 0.3s ease-in;
+
+      @include mobile {
+        margin-left: 0;
+        width: 35px;
+        height: 35px;
+      }
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $textColor;
+}
+
+.cards {
+  margin-top: 4.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-gap: 2rem;
+  padding: 2rem;
+  background-color: rgb(228, 224, 224);
+  width: 70%;
+  min-height: 100vh;
+
+  @include mobile {
+    width: 95%;
+    grid-gap: 1rem;
+    padding: 1rem;
+    margin-top: 7.6rem;
+    min-height: 100%;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(49, 45, 54);
+    padding: 10px;
+
+    @include mobile {
+      display: grid;
+      grid-template-columns: 40% auto;
+    }
+
+    .card-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.3rem;
+
+      h4 {
+        text-transform: uppercase;
+
+        @include mobile {
+          font-size: 20px;
+          padding-bottom: 1rem;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        color: rgb(223, 222, 222);
+
+        @include mobile {
+          font-size: 16px;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      border: 1px solid black;
+      transition: opacity .3s ease-out;
+
+      @include mobile {
+        opacity: 1;
+      }
+    }
+
+    &:hover img {
+      opacity: 1;
+    }
+  }
+}
+
+.active {
+  display: initial;
+}
+
+a.active {
+  height: 50%;
+}
+
+.inactive {
+  display: none;
+}
